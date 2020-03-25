@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Piano</title>
+    <style>
+        html, body{
+            height: 100%;
+        }
+
+        body{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, rgb(138, 11, 39), rgb(124, 22, 165));
+        }
+
+        .piano{
+            display: flex;
+            position: relative;
+        }
+
+        .white-key, .black-key{
+            cursor: pointer;
+        }
+
+        .white-key{
+            height: 100px;
+            width: 32px;
+            background-color: #fff;
+            border: 2px solid black;
+            border-radius: 0 0 6px 6px;
+            outline: none;
+        }
+
+        .black-key{
+            position: absolute;
+            width: 24px;
+            height: 80px;
+            background: linear-gradient(rgb(0, 0, 0), rgb(61, 61, 61));
+            border: 3px solid black;
+        }
+
+        .black-key.active{
+            background: linear-gradient(rgb(0, 0, 0), rgb(7, 7, 7));
+        }
+
+        .white-key.active{
+            background: rgb(187, 187, 187);
+        }
+
+        .Db4{
+            left: 19px;
+        }
+
+        .Eb4{
+            left: 52px;
+        }
+
+        .Gb4{
+            left: 115px;
+        }
+
+        .Ab4{
+            left: 148px;
+        }
+
+        .Bb4{
+            left: 181px;
+        }
+
+        .Db5{
+            left: 243px;
+        }
+
+        .Eb5{
+            left: 276px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="piano">
+        <button class="white-key C4"></button>
+            <button class="black-key Db4"></button>
+        <button class="white-key D4"></button>
+            <button class="black-key Eb4"></button>
+        <button class="white-key E4"></button>
+        <button class="white-key F4"></button>
+            <button class="black-key Gb4"></button>
+        <button class="white-key G4"></button>
+            <button class="black-key Ab4"></button>
+        <button class="white-key A4"></button>
+            <button class="black-key Bb4"></button>
+        <button class="white-key B4"></button>
+        <button class="white-key C5"></button>
+            <button class="black-key Db5"></button>
+        <button class="white-key D5"></button>
+            <button class="black-key Eb5"></button>
+        <button class="white-key E5"></button>
+    </div>
+
+    <script>
+
+        const playKey = (note, audio, key) => {
+            var note = document.querySelector("." + note);
+            function playAudio() {
+                const clone = audio.cloneNode();
+                clone.play();
+                setTimeout(() => (clone.volume - 0.8), 400);
+                setTimeout(() => (clone.volume - 0.6), 800);
+                setTimeout(() => (clone.volume - 0.4), 1200);
+                setTimeout(() => (clone.volume - 0.2), 1600);
+                setTimeout(() => (clone.volume - 0), 2000);
+                note.classList.add("active");
+                setTimeout(() => note.classList.remove("active"), 1500);
+            }
+
+            note.addEventListener("click", () => {playAudio();});
+            document.addEventListener('keydown', (event) => {
+                if(event.key == key){playAudio();};
+            });
+        }
+
+        playKey('C4', new Audio('sounds/C4.mp3'), 'q');
+            playKey('Db4', new Audio('sounds/Db4.mp3'), '2');
+        playKey('D4', new Audio('sounds/D4.mp3'), 'w');
+            playKey('Eb4', new Audio('sounds/Eb4.mp3'), '3');
+        playKey('E4', new Audio('sounds/E4.mp3'), 'e');
+        playKey('F4', new Audio('sounds/F4.mp3'), 'r');
+            playKey('Gb4', new Audio('sounds/Gb4.mp3'), '5');
+        playKey('G4', new Audio('sounds/G4.mp3'), 't');
+            playKey('Ab4', new Audio('sounds/Ab4.mp3'), '6');
+        playKey('A4', new Audio('sounds/A4.mp3'), 'y');
+            playKey('Bb4', new Audio('sounds/Bb4.mp3'), '7');
+        playKey('B4', new Audio('sounds/B4.mp3'), 'u');
+        playKey('C5', new Audio('sounds/C5.mp3'), 'i');
+            playKey('Db5', new Audio('sounds/Db5.mp3'), '9');
+        playKey('D5', new Audio('sounds/D5.mp3'), 'o');
+            playKey('Eb5', new Audio('sounds/Eb5.mp3'), '0');
+        playKey('E5', new Audio('sounds/E5.mp3'), 'p');
+
+    </script>
+</body>
+</html>
